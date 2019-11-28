@@ -1,0 +1,90 @@
+html, body {
+  height: auto;
+  min-height: 100vh;
+}
+
+body {
+  background-color: $background-grey;
+}
+
+.site-wrap {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1px 0;
+  height: auto;
+  position: relative;
+  /*$t is transparent, $g is light grey*/
+  background: repeating-linear-gradient(45deg, $t 0, $t 32px, $g 32px, $g 44px, $t 44px, $t 56px, $g 56px, $g 68px, $t 0),
+    repeating-linear-gradient(-45deg, $t 0, $t 32px, $g 32px, $g 44px, $t 44px, $t 56px, $g 56px, $g 68px, $t 0),
+    linear-gradient(to bottom left, #fc354c, #0abfbc);
+
+  .overlay-1, .overlay-2 {
+    position: absolute;
+    top: -1px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+  }
+
+  > .container > .row {
+    flex-direction: column-reverse;
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+    }
+  }
+}
+
+.overlay-1 {
+  background: linear-gradient(217deg, $light-blue, $t 70.71%),
+    linear-gradient(127deg, $light-yellow, $t 70.71%),
+    linear-gradient(336deg, $light-red, $t 70.71%);
+}
+
+.overlay-2 {
+  transition: opacity 3s;
+    background: linear-gradient(217deg, $light-yellow, $t 70.71%),
+      linear-gradient(127deg, $light-red, $t 70.71%),
+      linear-gradient(336deg, $light-blue, $t 70.71%);
+    opacity: 0;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  color: $charcoal;
+  @include work-sans-200();
+}
+
+h1, .h1 {
+  text-transform: lowercase;
+  font-size: $h1-size;
+  margin-bottom: 18px;
+}
+
+h2, .h2 {
+  text-transform: lowercase;
+  font-size: $h1-size - 10px;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+h3, .h3 {
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+p, .p {
+  @include tajawal-200();
+  font-size: 21px;
+  color: $charcoal;
+  margin-bottom: 15px;
+}
+
+strong, .strong {
+  font-weight: 500;
+}

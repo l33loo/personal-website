@@ -1,4 +1,4 @@
-/* From https://github.com/hankchizljaw/modern-css-reset/blob/master/src/reset.css
+/* Adapted from https://github.com/hankchizljaw/modern-css-reset/blob/master/src/reset.css
 
 Box sizing rules */
 *,
@@ -48,6 +48,10 @@ ol[class] {
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
+}
+
+a[class] {
+  text-decoration: none;
 }
 
 /* Make images easier to work with */

@@ -1,0 +1,14 @@
+// Fonts
+@mixin work-sans-200() {
+  font-family: 'Work Sans', 'sans-serif';
+  font-weight: 200;
+}
+@mixin work-sans-500() {
+  font-family: 'Work Sans', 'sans-serif';
+  font-weight: 500;
+}
+
+@mixin tajawal-200() {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 200;
+}
