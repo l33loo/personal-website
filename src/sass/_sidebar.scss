@@ -1,11 +1,17 @@
 .sidebar {
   &__content {
     margin-bottom: 0;
+    margin-top: $y-margin-xs;
 
     @include media-breakpoint-up(md) {
       position: sticky;
       top: $y-margin-md + $nav-height-scroll;
       margin-bottom: $y-margin-md;
+      margin-top: $y-margin-md;
+    }
+
+    .card {
+      margin: 0;
     }
   }
 
@@ -32,12 +38,5 @@
 
   &__text {
     padding: 45px;
-
-    p.subtitle {
-      margin-bottom: 18px;
-      font-size: 24px;
-      font-weight: 300;
-      color: #979798;
-    }
   }
 }

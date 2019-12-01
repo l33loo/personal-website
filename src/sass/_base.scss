@@ -83,6 +83,13 @@ p, .p {
   font-size: 21px;
   color: $charcoal;
   margin-bottom: 15px;
+
+  &.subtitle {
+      margin-bottom: 18px;
+      font-size: 24px;
+      font-weight: 300;
+      color: #979798;
+    }
 }
 
 strong, .strong {

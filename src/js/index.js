@@ -25,6 +25,22 @@ function addNavItemActiveClass(section) {
     $(`nav a.active:not([href="#${section}"]`).removeClass('active');
 }
 
+function addLazyLoad(className) {
+    $(`.${className}:not(.loaded)`).each(function(index, element) {
+        if (isScrolledIntoView(element)) {
+            $(element).addClass('loaded');
+        }
+    });
+}
+
+function isScrolledIntoView(element, offsetVal) {
+    const windowViewTop = $window.scrollTop(),
+          windowViewBottom = windowViewTop + $window.height(),
+          elementTop = $(element).offset().top,
+          elementOffset = offsetVal ? offsetVal : parseInt($(element).css('paddingTop'));
+
+    return elementTop >= windowViewTop && elementTop + elementOffset <= windowViewBottom;
+}
 
 $document.ready(function() {
     const $root = $('html, body'),
@@ -35,10 +51,12 @@ $document.ready(function() {
 
     styleNavBar();
     markActiveNavItem();
+    addLazyLoad('lazyload-text');
 
     $window.on("scroll touchmove", function() {
         styleNavBar();
         markActiveNavItem();
+        addLazyLoad('lazyload-text');
     });
 
     $('nav a').click(function(event) {
