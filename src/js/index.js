@@ -100,11 +100,18 @@ function addLazyLoad(className) {
     });
 }
 
-function isScrolledIntoView(element, offsetVal) {
-    const windowViewTop = $window.scrollTop(),
+function isScrolledIntoView(element) {
+    const windowViewTop = $document.scrollTop() + (isMobile() ? 0 : 70 /* Nav height */),
           windowViewBottom = windowViewTop + $window.height(),
-          elementTop = $(element).offset().top,
-          elementOffset = offsetVal ? offsetVal : parseInt($(element).css('paddingTop'));
+          elementOffsetTop = $(element).offset().top,
+          yTranslate = $(element).is('.lazyload-text') ? 30 : 0,
+          elementTop = elementOffsetTop + parseInt($(element).css('paddingTop')) + yTranslate,
+          elementBottom = elementOffsetTop + $(element).height() + yTranslate;
 
-    return elementTop >= windowViewTop && elementTop + elementOffset <= windowViewBottom;
+    return elementTop > windowViewTop && elementTop < windowViewBottom ||
+           elementBottom > windowViewTop && elementBottom < windowViewBottom;
+}
+
+function isMobile() {
+    return $window.width() < 768;
 }

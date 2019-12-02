@@ -1,6 +1,6 @@
 .lazyload {
   &-text {
-    transition: transform .9s, opacity 1.5s ease-out;
+    transition: transform .9s linear 0s, opacity 1.2s linear 0s;
 
     &:not(.loaded) {
       opacity: 0;
