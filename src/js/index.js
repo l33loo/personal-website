@@ -8,39 +8,8 @@ import '../sass/style.scss';
 import '../img/hero.jpg';
 import '../img/profile.jpg';
 
-// Functions
 const $document = $(document),
       $window = $(window);
-
-function styleNavBar() {
-    if ($document.scrollTop() === 0) {
-        $('nav:not(.fixed)').removeClass('scrolling').addClass('fixed');
-    } else {
-        $('nav:not(.scrolling)').removeClass('fixed').addClass('scrolling');
-    }
-}
-
-function addNavItemActiveClass(section) {
-    $(`nav a[href="#${section}"]:not(.active)`).addClass('active');
-    $(`nav a.active:not([href="#${section}"]`).removeClass('active');
-}
-
-function addLazyLoad(className) {
-    $(`.${className}:not(.loaded)`).each(function(index, element) {
-        if (isScrolledIntoView(element)) {
-            $(element).addClass('loaded');
-        }
-    });
-}
-
-function isScrolledIntoView(element, offsetVal) {
-    const windowViewTop = $window.scrollTop(),
-          windowViewBottom = windowViewTop + $window.height(),
-          elementTop = $(element).offset().top,
-          elementOffset = offsetVal ? offsetVal : parseInt($(element).css('paddingTop'));
-
-    return elementTop >= windowViewTop && elementTop + elementOffset <= windowViewBottom;
-}
 
 $document.ready(function() {
     const $root = $('html, body'),
@@ -103,3 +72,34 @@ $document.ready(function() {
         return $('ol.nav').height() + parseInt($('section#about').css('marginTop'));
     }
 });
+
+// Functions
+function styleNavBar() {
+    if ($document.scrollTop() === 0) {
+        $('nav:not(.fixed)').removeClass('scrolling').addClass('fixed');
+    } else {
+        $('nav:not(.scrolling)').removeClass('fixed').addClass('scrolling');
+    }
+}
+
+function addNavItemActiveClass(section) {
+    $(`nav a[href="#${section}"]:not(.active)`).addClass('active');
+    $(`nav a.active:not([href="#${section}"]`).removeClass('active');
+}
+
+function addLazyLoad(className) {
+    $(`.${className}:not(.loaded)`).each(function(index, element) {
+        if (isScrolledIntoView(element)) {
+            $(element).addClass('loaded');
+        }
+    });
+}
+
+function isScrolledIntoView(element, offsetVal) {
+    const windowViewTop = $window.scrollTop(),
+          windowViewBottom = windowViewTop + $window.height(),
+          elementTop = $(element).offset().top,
+          elementOffset = offsetVal ? offsetVal : parseInt($(element).css('paddingTop'));
+
+    return elementTop >= windowViewTop && elementTop + elementOffset <= windowViewBottom;
+}
