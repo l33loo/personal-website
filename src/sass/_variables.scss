@@ -1,5 +1,6 @@
 // Colors
-$background-grey: #dcdbde;
+$border-grey: #dcdcdc;
+$background-grey: lighten($border-grey, 6%);
 $nav-grey: #697698;
 $t: transparent;
 $g: rgba(255,255,255,0.7); /*a light grey*/
