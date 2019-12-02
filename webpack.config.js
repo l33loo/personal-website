@@ -12,6 +12,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const WebpackProvideGlobalPlugin = require('webpack-provide-global-plugin');
 
 module.exports = {
   mode: "production",
@@ -27,7 +28,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Lila Karpowicz, junior front-end web developer',
-      template: 'src/template.ejs'
+      template: '!!ejs-compiled-loader!src/index.template.ejs'
     })
   ],
   optimization: {
