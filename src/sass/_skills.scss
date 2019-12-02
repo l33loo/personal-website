@@ -1,0 +1,54 @@
+.skills {
+  &.row {
+    margin: 0 -15px;
+  }
+
+  .skill {
+    margin-bottom: 15px;
+
+    &__bar {
+      width: 100%;
+      height: 34px;
+      background-color: $background-grey;
+      border-radius: 50px;
+      overflow: hidden;
+    }
+
+    &__bar-fill {
+      height: 100%;
+      border-radius: 50px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      &.lazyload {
+        width: 0;
+        transition: width .9s;
+      }
+
+      &.loaded {
+      .skill__percent {
+        opacity: 1;
+      }
+    }
+
+      &.language {
+        background-color: $nav-grey;
+      }
+
+      &.tool {
+        background-color: $orange;
+      }
+    }
+
+    &__percent {
+        @include work-sans-500();
+        font-size: 10px;
+        color: $white;
+        padding: 0 5px;
+        opacity: 0;
+        transition: opacity .5s ease-in;
+    }
+  }
+}

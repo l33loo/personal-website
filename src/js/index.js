@@ -20,12 +20,12 @@ $document.ready(function() {
 
     styleNavBar();
     markActiveNavItem();
-    addLazyLoad('lazyload-text');
+    addLazyLoad('lazyload');
 
     $window.on("scroll touchmove", function() {
         styleNavBar();
         markActiveNavItem();
-        addLazyLoad('lazyload-text');
+        addLazyLoad('lazyload');
     });
 
     $('nav a').click(function(event) {
@@ -90,6 +90,11 @@ function addNavItemActiveClass(section) {
 function addLazyLoad(className) {
     $(`.${className}:not(.loaded)`).each(function(index, element) {
         if (isScrolledIntoView(element)) {
+
+            if ($(element).is('.skill__bar-fill')) {
+                $(element).css('width', `${$(element).data('value')}%`);
+            }
+
             $(element).addClass('loaded');
         }
     });

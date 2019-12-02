@@ -27,7 +27,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Lila Karpowicz, junior front-end web developer',
-      template: 'src/template.html'
+      template: 'src/template.ejs'
     })
   ],
   optimization: {

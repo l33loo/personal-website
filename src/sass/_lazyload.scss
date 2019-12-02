@@ -1,14 +1,15 @@
-.lazyload-text {
-  /*-webkit-transition: -webkit-transform .9s linear 0s, opacity .9s linear 0s;*/
-  transition: transform .9s, opacity 1.5s ease-out;
+.lazyload {
+  &-text {
+    transition: transform .9s, opacity 1.5s ease-out;
 
-  &:not(.loaded) {
-    opacity: 0;
-    transform: translateY(30px);
-  }
+    &:not(.loaded) {
+      opacity: 0;
+      transform: translateY(30px);
+    }
 
-  &.loaded {
-    opacity: 1;
-    transform: translateY(0);
+    &.loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

@@ -27,7 +27,7 @@
       <div class="row">
       <div class="content-container col-12 col-md-8">
       <section id="about" class="card">
-        <div class="card__container lazyload-text">
+        <div class="card__container lazyload lazyload-text">
           <h1>About me</h1>
           <p>
             Hello! I'm <strong>Lila Karpowicz</strong>, a junior front-end web developer.
@@ -46,44 +46,41 @@
           </p>
         </div>
       </section>
+
+      <%
+        const skills = [
+          {'name': 'JavaScript', 'type': 'language', 'percentage': 38},
+          {'name': 'Python', 'type': 'language', 'percentage': 30},
+          {'name': 'Ruby', 'type': 'language', 'percentage': 26},
+          {'name': 'HTML', 'type': 'language', 'percentage': 80},
+          {'name': 'CSS', 'type': 'language', 'percentage': 50},
+          {'name': 'SQL', 'type': 'language', 'percentage': 38},
+          {'name': 'SQL', 'type': 'language', 'percentage': 38},
+          {'name': 'React', 'type': 'tool', 'percentage': 38},
+          {'name': 'git', 'type': 'tool', 'percentage': 45},
+        ];
+      %>
+
       <section id="skills" class="card">
         <div class="card__container">
           <h2 class="h1">My skills</h2>
-          <div class="element-first">
-            <div class="h3">LANGUAGES</div>
-            <p>javascript&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></p>
-            <p>php&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9675;&#9675;&#9675;</small></p>
-            <p>python&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9675;&#9675;&#9675;</small></p>
-            <p>html &amp; css&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></p>
-          </div>
+          <ul class="skills row">
 
-          <div class="element">
-            <div class="h3">FRAMEWORKS ETC.</div>
-            <div>react&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-            <div>nodeJS &amp; expressJS&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9675;&#9675;&#9675;</small></div>
-            <div>jQuery&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-            <div>symfony&nbsp;&nbsp;&nbsp;<small>&#9679;&#9675;&#9675;&#9675;&#9675;</small></div>
-          </div>
+            <% skills.forEach(function(e) { %>
+              <li class="skill col-12 col-sm-6 col-md-4">
+                <h3 class="skill__title"><%= e.name %></h3>
+                <div class="skill__bar">
+                  <div class="skill__bar-fill lazyload <%= e.type %> p" data-value="<%= e.percentage %>">
+                    <div class="skill__percent"><%= e.percentage %>%</div>
+                  </div>
+                </div>
+              </li>
+            <% }); %>
 
-          <div class="element">
-            <div class="h3">CMS</div>
-            <div>wordpress&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-            <div>drupal&nbsp;&nbsp;&nbsp;<small>&#9679;&#9675;&#9675;&#9675;&#9675;</small></div>
-          </div>
-
-          <div class="element">
-            <div class="h3">DATABASES</div>
-            <div>postgreSQL&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9675;&#9675;&#9675;</small></div>
-            <div>mongoDB&nbsp;&nbsp;&nbsp;<small>&#9679;&#9675;&#9675;&#9675;&#9675;</small></div>
-          </div>
-
-          <div class="element">
-            <div class="h3">DEV TOOLS</div>
-            <div>git - gitlab - github&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-            <div>jira - confluence - trello</div>
-          </div>
+          </ul>
         </div>
       </section>
+
       <section id="experience" class="card">
         <div class="card__container">
           <h2 class="h1">Experience & Education</h2>
