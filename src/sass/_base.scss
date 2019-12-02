@@ -63,7 +63,8 @@ h6, .h6 {
 h1, .h1 {
   text-transform: lowercase;
   font-size: $h1-size;
-  margin-bottom: 18px;
+  line-height: $h1-size;
+  margin-bottom: $h1-size - 10px;
 }
 
 h2, .h2 {
