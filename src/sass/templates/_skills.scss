@@ -3,6 +3,10 @@
     margin: 0 -15px;
   }
 
+  &__legend {
+    margin-bottom: 20px;
+  }
+
   .skill {
     margin-bottom: 15px;
 
@@ -28,27 +32,19 @@
       }
 
       &.loaded {
-      .skill__percent {
-        opacity: 1;
-      }
-    }
-
-      &.language {
-        background-color: $nav-grey;
-      }
-
-      &.tool {
-        background-color: $orange;
+        .skill__percent {
+          opacity: 1;
+        }
       }
     }
 
     &__percent {
-        @include work-sans-500();
-        font-size: 10px;
-        color: $white;
-        padding: 0 5px;
-        opacity: 0;
-        transition: opacity .5s ease-in;
+      @include work-sans-500();
+      font-size: 10px;
+      color: $white;
+      padding: 0 5px;
+      opacity: 0;
+      transition: opacity .5s ease-in;
     }
   }
 }

@@ -5,6 +5,9 @@ html, body {
 
 body {
   background-color: $background-grey;
+  @include tajawal-200();
+  font-size: 21px;
+  color: $charcoal;
 }
 
 .site-wrap {
@@ -76,7 +79,7 @@ h2, .h2 {
 
 h3, .h3 {
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 p, .p {
@@ -86,13 +89,37 @@ p, .p {
   margin-bottom: 15px;
 
   &.subtitle {
-      margin-bottom: 18px;
-      font-size: 24px;
-      font-weight: 300;
-      color: #979798;
-    }
+    margin-bottom: 18px;
+    font-size: 24px;
+    font-weight: 300;
+  }
 }
 
 strong, .strong {
   font-weight: 500;
+}
+
+.language {
+  background-color: $nav-grey;
+}
+
+.tool {
+  background-color: $orange;
+}
+
+.button {
+  @include work-sans-500();
+  font-size: 13px;
+  line-height: 13px;
+  color: $white;
+  padding: 4px;
+  margin-right: 4px;
+  border-radius: 2px;
+
+  &__small {
+    font-size: 11px;
+    line-height: 11px;
+    padding: 3px;
+    margin: 0 2px 2px;
+  }
 }

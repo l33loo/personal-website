@@ -1,10 +1,27 @@
+<% const skills = [
+  {'name': 'JavaScript', 'type': 'language', 'percentage': 38},
+  {'name': 'Python', 'type': 'language', 'percentage': 30},
+  {'name': 'Ruby', 'type': 'language', 'percentage': 26},
+  {'name': 'HTML', 'type': 'language', 'percentage': 80},
+  {'name': 'CSS', 'type': 'language', 'percentage': 50},
+  {'name': 'SQL', 'type': 'language', 'percentage': 38},
+  {'name': 'SQL', 'type': 'language', 'percentage': 38},
+  {'name': 'React', 'type': 'tool', 'percentage': 38},
+  {'name': 'git', 'type': 'tool', 'percentage': 45},
+]; %>
+
 <section id="skills" class="card">
   <div class="card__container">
     <h2 class="h1">My skills</h2>
+    <div class="skills__legend">
+      <span class="language button" aria-hidden="true">languages</span>
+      <span class="tool button" aria-hidden="true">tools & libraries</span>
+    </div>
+
     <ul class="skills row">
 
       <% skills.forEach(function(e) { %>
-        <li class="skill col-12 col-sm-6 col-md-4">
+        <li class="skill col-12 col-sm-6 col-lg-4">
           <h3 class="skill__title"><%= e.name %></h3>
           <div class="skill__bar">
             <div class="skill__bar-fill lazyload <%= e.type %> p" data-value="<%= e.percentage %>">

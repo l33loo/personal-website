@@ -1,38 +1,125 @@
+<%
+  const experience = [
+    {
+      'date': ['11.2018', '11.2019'],
+      'title': 'Junior front-end developer',
+      'location': 'VERB Interactive, Victoria BC',
+      'tasks': [
+        'Worked on site builds and maintenance for the tourism industry.',
+        'Debugging, web accessibility, translation, cross-browser compatibility.'
+      ],
+      'stack': {
+        'languages': [
+          'JavaScript',
+          'PHP',
+          'HTML',
+          'CSS',
+        ],
+        'tools': [
+          'git',
+          'jQuery',
+          'SASS',
+          'React',
+          'Symfony',
+          'Wordpress',
+        ]
+      }
+    },
+    {
+      'date': ['06.2018', '11.2018'],
+      'title': 'Tech support rep',
+      'location': 'Silkstart Technology Inc., Victoria BC',
+      'tasks': [
+        'Provided tech support and wrote FAQs.',
+        'Investigated and documented bugs.',
+        'Fixed minor tech issues.'
+      ],
+      'stack': {
+        'languages': [
+          'JavaScript',
+          'CSS',
+          'Python',
+        ],
+        'tools': [
+          'jQuery',
+        ]
+      }
+    },
+    {
+      'date': ['04.2018'],
+      'title': 'Web Development Diploma',
+      'location': 'Lighthouse Labs, Victoria BC',
+      'projects': [
+        ['Nudge', 'https://www.github.com/l33loo/nudge-browser'],
+        ['Altmaps', 'https://www.github.com/l33loo/altmaps'],
+        ['Tweeter', 'https://www.github.com/l33loo/tweeter'],
+      ],
+      'stack': {
+        'languages': [
+          'JavaScript',
+          'HTML',
+          'CSS',
+          'Ruby',
+        ],
+        'tools': [
+          'git',
+          'jQuery',
+          'SASS',
+          'React',
+        ]
+      }
+    }
+  ];
+%>
+
 <section id="experience" class="card">
   <div class="card__container">
     <h2 class="h1">Experience & Education</h2>
-    <div class="element-first">
-      <div class="h3">LANGUAGES</div>
-      <div>javascript&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-      <div>php&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9675;&#9675;&#9675;</small></div>
-      <div>python&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9675;&#9675;&#9675;</small></div>
-      <div>html &amp; css&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-    </div>
+    <ol class="container experiences">
 
-    <div class="element">
-      <div class="h3">FRAMEWORKS ETC.</div>
-      <div>react&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-      <div>nodeJS &amp; expressJS&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9675;&#9675;&#9675;</small></div>
-      <div>jQuery&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-      <div>symfony&nbsp;&nbsp;&nbsp;<small>&#9679;&#9675;&#9675;&#9675;&#9675;</small></div>
-    </div>
+      <% experience.forEach(function(e) { %>
+        <li class="row experience lazyload">
+          <div class="col-4 h3 experience__date text-right">
+            <%= e.date[0] %>
+            <% if (e.date[1]) { %>
+              &ndash; <%= e.date[1] %>
+            <% } %>
+          </div>
+          <div class="col-8 experience__details">
+            <h3><%= e.title %></h3>
+            <div class="experience__location text-muted"><%= e.location %></div>
+            <ul class="experience__stack row">
 
-    <div class="element">
-      <div class="h3">CMS</div>
-      <div>wordpress&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-      <div>drupal&nbsp;&nbsp;&nbsp;<small>&#9679;&#9675;&#9675;&#9675;&#9675;</small></div>
-    </div>
+              <% e.stack.languages.forEach(function(lang) { %>
+                <li class="language button button__small"><%= lang %></li>
+              <% }); %>
 
-    <div class="element">
-      <div class="h3">DATABASES</div>
-      <div>postgreSQL&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9675;&#9675;&#9675;</small></div>
-      <div>mongoDB&nbsp;&nbsp;&nbsp;<small>&#9679;&#9675;&#9675;&#9675;&#9675;</small></div>
-    </div>
+              <% e.stack.tools.forEach(function(tool) { %>
+                <li class="tool button button__small"><%= tool %></li>
+              <% }); %>
 
-    <div class="element">
-      <div class="h3">DEV TOOLS</div>
-      <div>git - gitlab - github&nbsp;&nbsp;&nbsp;<small>&#9679;&#9679;&#9679;&#9675;&#9675;</small></div>
-      <div>jira - confluence - trello</div>
-    </div>
+            </ul>
+            <ul>
+
+              <% if (e.tasks && e.tasks.length) { %>
+                <% e.tasks.forEach(function(task) { %>
+                  <li><%= task %></li>
+                <% }); %>
+              <% } %>
+
+              <%if (e.projects && e.projects.length) { %>
+                <% e.projects.forEach(function(project) { %>
+                  <li>
+                    <a class="project" href="<%= project[1] %>"><%= project[0] %></a>
+                  </li>
+                <% }); %>
+              <% } %>
+
+            </ul>
+          </div>
+        </li>
+      <% }); %>
+
+    </ol>
   </div>
 </section>
