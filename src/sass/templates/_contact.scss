@@ -1,7 +1,7 @@
 .sidebar {
   &__content {
     margin-bottom: 0;
-    margin-top: $y-margin-xs;
+    margin-bottom: $y-margin-xs;
 
     @include media-breakpoint-up(md) {
       position: sticky;

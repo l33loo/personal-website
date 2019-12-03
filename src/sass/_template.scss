@@ -31,7 +31,7 @@ body {
   }
 
   > .container > .row {
-    flex-direction: column-reverse;
+    flex-direction: column;
 
     @include media-breakpoint-up(md) {
       flex-direction: row;

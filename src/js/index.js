@@ -81,16 +81,16 @@ $window.on('load', function() {
               skillsTop = $skills.offset().top - topOffset,
               experienceTop = $experience.offset().top - topOffset;
 
-        if ((isMobile() && documentTop < contactTop) || (!isMobile() && documentTop < aboutTop)) {
+        if (documentTop < aboutTop) {
             addNavItemActiveClass('home');
-        } else if (isMobile() && documentTop < aboutTop) {
-            addNavItemActiveClass('contact');
         } else if (documentTop < skillsTop) {
             addNavItemActiveClass('about');
         } else if (documentTop < experienceTop) {
             addNavItemActiveClass('skills');
-        } else {
+        } else if (!isMobile() || (isMobile() && documentTop < contactTop)) {
             addNavItemActiveClass('experience');
+        } else if (isMobile()) {
+            addNavItemActiveClass('contact');
         }
     }
 
