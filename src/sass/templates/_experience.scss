@@ -38,7 +38,7 @@
       &:before {
         content: '';
         position: absolute;
-        top: 16px;
+        top: 1px;
         right: -10px;
         width: 22px;
         height: 22px;
@@ -49,10 +49,6 @@
         -webkit-border-radius: 50%;
         transition: transform .1s ease-out .9s;
       }
-    }
-
-    &__details {
-      padding-top: 15px;
     }
 
     &__location {
