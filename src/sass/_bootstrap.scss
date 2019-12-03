@@ -5,3 +5,9 @@
 
 // Optional
 @import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/utilities";
+
+// Overrides
+.text-muted {
+  color: #979798 !important;
+}
