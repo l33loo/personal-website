@@ -3,10 +3,16 @@ nav {
   top: 0;
   z-index: 1;
   transition: all $nav-header-trans-time;
+  display: flex;
+  flex-direction: row-reverse;
 
   &.fixed {
-    height: $nav-height-fixed;
+    height: $nav-height-scroll;
     background: linear-gradient($nav-grey 0%, transparent 100%);
+
+    @include media-breakpoint-up(sm) {
+      height: $nav-height-fixed;
+    }
   }
 
   &.scrolling {
@@ -14,30 +20,60 @@ nav {
     background: linear-gradient($nav-grey $nav-height-scroll, transparent 100%);
   }
 
-  ol {
+  button, a {
     height: 100%;
-    max-height: $nav-height-scroll;
+    max-height: $nav-height-scroll - 1px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    @include work-sans-500();
+    font-size: 16px;
+    color: $white;
+    margin-right: 4px;
+  }
+
+  button {
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    width: 25%;
+
+    @include media-breakpoint-up(sm) {
+      display: none;
+    }
+  }
+
+  ol {
+    position: absolute;
+    top: 100%;
+    display: none;
+    height: 5 * $nav-height-scroll;
     width: 100%;
     max-width: 960px;
     margin: 0 auto !important;
+    background-color: lighten($nav-grey, 10%);
+
+    @include media-breakpoint-up(sm) {
+      top: 0;
+      position: relative;
+      display: flex;
+      height: 100%;
+      max-height: $nav-height-scroll;
+      background-color: transparent;
+    }
 
     li {
-      width: 25%;
+      width: 100%;
       display: block;
-      height: 100%;
+      height: $nav-height-scroll;
       border-bottom: 0;
 
+      @include media-breakpoint-up(sm) {
+        width: 25%;
+      }
+
       a {
-        height: $nav-height-scroll - 1px;
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-transform: lowercase;
-        @include work-sans-500();
-        font-size: 16px;
-        color: $white;
         position: relative;
 
         &:before {

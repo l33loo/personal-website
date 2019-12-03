@@ -15,10 +15,13 @@ $window.on('load', function() {
     $('#load').fadeOut();
 
     const $root = $('html, body'),
+          $contact = $('#contact'),
           $about = $('#about'),
           $skills = $('#skills'),
           $experience = $('#experience'),
-          $header = $('header');
+          $header = $('header'),
+          $nav = $('nav'),
+          $navMenu = $('nav ol.nav');
 
     styleNavBar();
     markActiveNavItem();
@@ -33,10 +36,22 @@ $window.on('load', function() {
     $('nav a').click(function(event) {
         event.preventDefault();
 
+        if (isMobile()) {
+            $navMenu.slideUp();
+        }
+
         const href = $(this).attr('href');
         $root.animate({
             scrollTop: $(href).offset().top - getTopOffset()
         }, 500);
+    });
+
+    $('.nav-button').on('click', function() {
+        if ($navMenu.is(':hidden')) {
+            $navMenu.slideDown();
+        } else {
+            $navMenu.slideUp();
+        }
     });
 
     $header.click(function() {
@@ -44,6 +59,12 @@ $window.on('load', function() {
         $root.animate({
             scrollTop: $('#main').offset().top - $('ol.nav').height()
         }, 1000);
+    });
+
+    $document.on('click touchstart', function(event) {
+        if (isMobile() && !$(event.target).closest('nav').length) {
+            $navMenu.slideUp();
+        }
     });
 
     setInterval(function() {
@@ -55,12 +76,15 @@ $window.on('load', function() {
     function markActiveNavItem() {
         const topOffset = getTopOffset(),
               documentTop = $document.scrollTop(),
+              contactTop = $contact.offset().top - topOffset,
               aboutTop = $about.offset().top - topOffset,
               skillsTop = $skills.offset().top - topOffset,
               experienceTop = $experience.offset().top - topOffset;
 
-        if (documentTop < aboutTop) {
+        if ((isMobile() && documentTop < contactTop) || (!isMobile() && documentTop < aboutTop)) {
             addNavItemActiveClass('home');
+        } else if (isMobile() && documentTop < aboutTop) {
+            addNavItemActiveClass('contact');
         } else if (documentTop < skillsTop) {
             addNavItemActiveClass('about');
         } else if (documentTop < experienceTop) {
@@ -71,7 +95,7 @@ $window.on('load', function() {
     }
 
     function getTopOffset() {
-        return $('ol.nav').height() + parseInt($('section#about').css('marginTop'));
+        return 70 + parseInt($('section#about').css('marginTop'));
     }
 });
 

@@ -12,7 +12,11 @@ header {
 }
 
 nav.fixed + header {
-  margin: -$nav-height-fixed auto 0;
+  margin: -$nav-height-scroll auto 0;
+
+  @include media-breakpoint-up(sm) {
+    margin: -$nav-height-fixed auto 0;
+  }
 }
 
 nav.scrolling + header {
