@@ -11,7 +11,9 @@ import '../img/profile.jpg';
 const $document = $(document),
       $window = $(window);
 
-$document.ready(function() {
+$window.on('load', function() {
+    $('#load').fadeOut();
+
     const $root = $('html, body'),
           $about = $('#about'),
           $skills = $('#skills'),

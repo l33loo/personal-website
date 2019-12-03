@@ -123,3 +123,18 @@ strong, .strong {
     margin: 0 2px 2px;
   }
 }
+
+#load {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: $background-grey;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity .2s ease-in;
+
+  &.loaded {
+    opacity: 0;
+  }
+}
