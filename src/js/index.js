@@ -73,6 +73,10 @@ $window.on('load', function() {
         $overlay.css('opacity', overlayOpacity === '1' ? '0' : '1');
     }, 3000);
 
+    /* Add the transition here instead of in the SCSS file to let the parallax
+       plugin do its magin first. Otherwise the image loads below the nav. */
+    $header.css('transition', 'margin .5s');
+
     function markActiveNavItem() {
         const topOffset = getTopOffset(),
               documentTop = $document.scrollTop(),
