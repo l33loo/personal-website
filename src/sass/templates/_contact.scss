@@ -1,7 +1,7 @@
 .sidebar {
   &__content {
     margin-bottom: 0;
-    margin-bottom: $y-margin-xs;
+    margin-top: $y-margin-xs;
 
     @include media-breakpoint-up(md) {
       position: sticky;
@@ -12,6 +12,30 @@
 
     .card {
       margin: 0;
+
+      &__container {
+        font-weight: 300;
+      }
+
+      @include media-breakpoint-between(md, lg) {
+        &__container {
+          padding: 24px;
+          font-size: 18px;
+        }
+
+        .h2 {
+          font-size: 26px;
+        }
+
+        .p {
+          margin-bottom: 8px;
+        }
+
+        p.subtitle {
+          font-size: 19px;
+          line-height: 19px;
+        }
+      }
     }
   }
 
@@ -23,10 +47,6 @@
 
     @include media-breakpoint-up(md) {
       padding-bottom: 75%;
-    }
-
-    @include media-breakpoint-up(md) {
-      padding-bottom: 100%;
     }
 
     img {
