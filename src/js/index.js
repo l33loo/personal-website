@@ -21,8 +21,10 @@ $window.on('load', function() {
           $experience = $('#experience'),
           $header = $('header'),
           $nav = $('nav'),
-          $navMenu = $('nav ol.nav');
+          $navMenu = $('ol#nav-menu'),
+          $navButton = $('#nav-button');
 
+    addNavAriaAttr();
     styleNavBar();
     markActiveNavItem();
     addLazyLoad('lazyload');
@@ -31,6 +33,14 @@ $window.on('load', function() {
         styleNavBar();
         markActiveNavItem();
         addLazyLoad('lazyload');
+    });
+
+    let timeout;
+    $window.resize(function() {
+        timeout = setTimeout(function() {
+            addNavAriaAttr();
+            clearTimeout(timeout);
+        }, 100);
     });
 
     $('nav a').click(function(event) {
@@ -46,11 +56,13 @@ $window.on('load', function() {
         }, 500);
     });
 
-    $('.nav-button').on('click', function() {
+    $navButton.on('click', function() {
         if ($navMenu.is(':hidden')) {
             $navMenu.slideDown();
+            $(this).attr('aria-expanded', 'true');
         } else {
             $navMenu.slideUp();
+            $(this).attr('aria-expanded', 'false');
         }
     });
 
@@ -64,6 +76,7 @@ $window.on('load', function() {
     $document.on('click touchstart', function(event) {
         if (isMobile() && !$(event.target).closest('nav').length) {
             $navMenu.slideUp();
+            $navButton.attr('aria-expanded', 'false');
         }
     });
 
@@ -74,8 +87,17 @@ $window.on('load', function() {
     }, 3000);
 
     /* Add the transition here instead of in the SCSS file to let the parallax
-       plugin do its magin first. Otherwise the image loads below the nav. */
+       plugin do its magin first. Otherwise the image loads below the nav and
+       the scrolling gets choppy. */
     $header.css('transition', 'margin .5s');
+
+    function addNavAriaAttr() {
+        if (isMobile()) {
+            $navMenu.attr('aria-labelledby', 'nav-button');
+        } else {
+            $navMenu.removeAttr('aria-labelledby');
+        }
+    }
 
     function markActiveNavItem() {
         const topOffset = getTopOffset(),
