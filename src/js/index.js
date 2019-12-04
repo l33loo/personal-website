@@ -66,6 +66,30 @@ $window.on('load', function() {
         }
     });
 
+    let isShiftDown = false;
+    $('nav li').last().on('keydown keyup', function(event) {
+        const isEventKeydown = event.type === 'keydown';
+
+        if (isMobile()) {
+            // Make sure the menu doesn't close when Shift + Tab are down concurrently
+            if (!isEventKeydown) {
+                isShiftDown = false;
+            } else if (event.key === 'Shift') {
+                isShiftDown = true;
+            } else if (event.key === 'Tab' && !isShiftDown && isEventKeydown) {
+                $navMenu.slideUp();
+                $navButton.attr('aria-expanded', 'false');
+            }
+        }
+    });
+
+    $navMenu.on('keydown', function(event) {
+        if (isMobile() && event.key === 'Escape') {
+            $navMenu.slideUp();
+            $navButton.attr('aria-expanded', 'false').focus();
+        }
+    });
+
     $header.click(function() {
         addNavItemActiveClass('about');
         $root.animate({
