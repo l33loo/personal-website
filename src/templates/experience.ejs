@@ -13,15 +13,15 @@
           'JavaScript',
           'PHP',
           'HTML',
-          'CSS',
+          'CSS'
         ],
         'tools': [
           'git',
           'jQuery',
-          'SASS',
           'React',
           'Symfony',
           'Wordpress',
+          'Bootstrap'
         ]
       }
     },
@@ -46,7 +46,7 @@
       }
     },
     {
-      'date': ['04.2018'],
+      'date': ['03.2018', '05.2018'],
       'title': 'Web Development Diploma',
       'location': 'Lighthouse Labs, Victoria BC',
       'projects': [
@@ -59,13 +59,22 @@
           'JavaScript',
           'HTML',
           'CSS',
+          'SASS',
           'Ruby',
+          'SQL'
         ],
         'tools': [
           'git',
           'jQuery',
-          'SASS',
           'React',
+          'Rails',
+          'Webpack',
+          'Node.js',
+          'Express',
+          'PostgreSQL',
+          'MongoDB',
+          'Mocha',
+          'Bootstrap'
         ]
       }
     }
@@ -75,17 +84,17 @@
 <section id="experience" class="card">
   <div class="card__container">
     <h2 class="h1">Experience & Education</h2>
-    <ol class="container experiences">
+    <ol class="experiences">
 
       <% experience.forEach(function(e) { %>
-        <li class="row experience lazyload">
-          <div class="col-4 h3 experience__date text-right">
+        <li class="experience lazyload d-flex">
+          <div class="h3 experience__date text-right">
             <%= e.date[0] %>
             <% if (e.date[1]) { %>
               &ndash; <%= e.date[1] %>
             <% } %>
           </div>
-          <div class="col-8 experience__details">
+          <div class="experience__details">
             <h3><%= e.title %></h3>
             <div class="experience__location text-muted"><%= e.location %></div>
             <ul class="experience__stack row">
@@ -99,23 +108,25 @@
               <% }); %>
 
             </ul>
-            <ul>
 
               <% if (e.tasks && e.tasks.length) { %>
-                <% e.tasks.forEach(function(task) { %>
-                  <li><%= task %></li>
-                <% }); %>
+                <ul>
+                  <% e.tasks.forEach(function(task) { %>
+                    <li><%= task %></li>
+                  <% }); %>
+                </ul>
               <% } %>
 
               <%if (e.projects && e.projects.length) { %>
-                <% e.projects.forEach(function(project) { %>
-                  <li>
-                    <a class="project" href="<%= project[1] %>" target="_blank"><%= project[0] %></a>
-                  </li>
-                <% }); %>
+                <h4>Projects:</h4>
+                <ul>
+                  <% e.projects.forEach(function(project) { %>
+                    <li>
+                      <a class="project" href="<%= project[1] %>" target="_blank"><%= project[0] %></a>
+                    </li>
+                  <% }); %>
+                </ul>
               <% } %>
-
-            </ul>
           </div>
         </li>
       <% }); %>
