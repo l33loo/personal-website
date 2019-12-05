@@ -187,7 +187,7 @@ function styleNavBar() {
 
 function addNavItemActiveClass(section) {
     $(`nav a[href="#${section}"]:not(.active)`).addClass('active');
-    $(`nav a.active:not([href="#${section}"]`).removeClass('active');
+    $(`nav a.active:not([href="#${section}"])`).removeClass('active');
 }
 
 function isMobile() {
