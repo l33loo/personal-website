@@ -197,10 +197,13 @@ a.icon {
   height: 100vh;
   position: fixed;
   top: 0;
-  background-color: $background-grey;
+  background-color: $white;
   z-index: 2;
   opacity: 1;
-  transition: opacity .2s ease-in;
+  transition: opacity .2s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.loaded {
     opacity: 0;
