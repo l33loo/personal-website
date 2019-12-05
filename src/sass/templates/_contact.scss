@@ -5,6 +5,7 @@
 
     @include media-breakpoint-up(md) {
       position: sticky;
+      position: -webkit-sticky;
       top: $y-margin-md + $nav-height-scroll;
       margin-bottom: $y-margin-md;
       margin-top: $y-margin-md;
