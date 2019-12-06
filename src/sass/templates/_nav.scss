@@ -2,13 +2,14 @@ nav {
   position: sticky;
   top: 0;
   z-index: 1;
-  transition: all $nav-header-trans-time;
   display: flex;
   flex-direction: row-reverse;
 
   &.fixed {
     height: $nav-height-scroll;
     background: linear-gradient($nav-grey 0%, transparent 100%);
+    box-shadow: 0 0 0 transparent;
+    transition: height $nav-header-trans-time, background $nav-header-trans-time, box-shadow 0s linear 0s;
 
     @include media-breakpoint-up(sm) {
       height: $nav-height-fixed;
@@ -18,6 +19,8 @@ nav {
   &.scrolling {
     height: $nav-height-scroll;
     background: linear-gradient($nav-grey $nav-height-scroll, transparent 100%);
+    box-shadow: 0 0 5px $black;
+    transition: height $nav-header-trans-time, background $nav-header-trans-time, box-shadow .2s linear .4s;
   }
 
   button, a {
@@ -29,7 +32,12 @@ nav {
     @include work-sans-500();
     font-size: 16px;
     color: $white;
-    margin-right: 4px;
+    transition: outline .4s ease;
+
+    &:focus {
+      outline-offset: -4px;
+      outline-color: $white;
+    }
   }
 
   button {
@@ -39,7 +47,26 @@ nav {
     width: 25%;
 
     @include media-breakpoint-up(sm) {
-      display: none;
+      display: none !important;
+    }
+
+    &:before {
+      font-size: 24px;
+      transition: all .08s linear;
+    }
+
+    &[aria-expanded="false"]:before {
+      content: '\f0c9';
+    }
+
+    &[aria-expanded="true"]:before {
+      content: '\f00d';
+    }
+
+    &:hover, &:focus {
+      &:before {
+        font-size: 34px;
+      }
     }
   }
 
@@ -48,10 +75,14 @@ nav {
     top: 100%;
     display: none;
     height: 5 * $nav-height-scroll;
+    max-height: calc(100vh - 70px);
+    overflow-y: scroll;
     width: 100%;
     max-width: 960px;
     margin: 0 auto !important;
-    background-color: lighten($nav-grey, 10%);
+    background-color: $nav-grey;
+    border-top: 2px solid $white;
+    opacity: .97;
 
     @include media-breakpoint-up(sm) {
       top: 0;
@@ -60,6 +91,8 @@ nav {
       height: 100%;
       max-height: $nav-height-scroll;
       background-color: transparent;
+      border: 0;
+      opacity: 1;
     }
 
     li {
@@ -69,25 +102,39 @@ nav {
       border-bottom: 0;
 
       @include media-breakpoint-up(sm) {
+        width: 20%;
+      }
+
+      @include media-breakpoint-up(md) {
         width: 25%;
       }
 
       a {
         width: 100%;
         position: relative;
+        transition: background-color 200ms ease-in-out;
 
         &:before {
-          content: '';
-          transition: height 400ms;
+          transition: height 200ms;
           position: absolute;
           bottom: 0;
           width: 100%;
           height: 0;
           background-color: $white;
+
+          @include media-breakpoint-up(sm) {
+            content: '';
+          }
         }
 
         &:hover,
         &.active {
+          background-color: lighten($nav-grey, 10%);
+
+          @include media-breakpoint-up(sm) {
+            background-color: $t;
+          }
+
           &:before {
             height: 3px;
           }

@@ -22,7 +22,8 @@ $window.on('load', function() {
           $header = $('header'),
           $nav = $('nav'),
           $navMenu = $('ol#nav-menu'),
-          $navButton = $('#nav-button');
+          $navButton = $('#nav-button'),
+          navHeight = 70;
 
     addNavAriaAttr();
     styleNavBar();
@@ -48,6 +49,7 @@ $window.on('load', function() {
 
         if (isMobile()) {
             $navMenu.slideUp();
+            $navButton.attr('aria-expanded', 'false');
         }
 
         const href = $(this).attr('href');
@@ -90,10 +92,10 @@ $window.on('load', function() {
         }
     });
 
-    $header.click(function() {
+    $header.on('click touchend', function() {
         addNavItemActiveClass('about');
         $root.animate({
-            scrollTop: $('#main').offset().top - $('ol.nav').height()
+            scrollTop: $('#main').offset().top - navHeight
         }, 1000);
     });
 
@@ -126,26 +128,51 @@ $window.on('load', function() {
     function markActiveNavItem() {
         const topOffset = getTopOffset(),
               documentTop = $document.scrollTop(),
-              contactTop = $contact.offset().top - topOffset,
-              aboutTop = $about.offset().top - topOffset,
-              skillsTop = $skills.offset().top - topOffset,
-              experienceTop = $experience.offset().top - topOffset;
+              contactTop = Math.floor($contact.offset().top - topOffset),
+              aboutTop = Math.floor($about.offset().top - topOffset),
+              skillsTop = Math.floor($skills.offset().top - topOffset),
+              experienceTop = Math.floor($experience.offset().top - topOffset);
 
-        if (documentTop < aboutTop) {
+        if ((!isMobile() && documentTop < aboutTop) || (isMobile() && documentTop < contactTop)) {
             addNavItemActiveClass('home');
+        } else if (isMobile() && documentTop < aboutTop) {
+            addNavItemActiveClass('contact');
         } else if (documentTop < skillsTop) {
             addNavItemActiveClass('about');
         } else if (documentTop < experienceTop) {
             addNavItemActiveClass('skills');
-        } else if (!isMobile() || (isMobile() && documentTop < contactTop)) {
+        } else {
             addNavItemActiveClass('experience');
-        } else if (isMobile()) {
-            addNavItemActiveClass('contact');
         }
     }
 
+    function addLazyLoad(className) {
+        $(`.${className}:not(.loaded)`).each(function(index, element) {
+            if (isScrolledIntoView(element)) {
+
+                if ($(element).is('.skill__bar-fill')) {
+                    $(element).css('width', `${$(element).data('value')}%`);
+                }
+
+                $(element).addClass('loaded');
+            }
+        });
+    }
+
+    function isScrolledIntoView(element) {
+        const windowViewTop = $document.scrollTop() + (isMobile() ? 0 : navHeight),
+              windowViewBottom = windowViewTop + $window.height(),
+              elementOffsetTop = $(element).offset().top,
+              yTranslate = $(element).is('.lazyload-text') ? 30 : 0,
+              elementTop = elementOffsetTop + parseInt($(element).css('paddingTop')) + yTranslate,
+              elementBottom = elementOffsetTop + $(element).height() + yTranslate;
+
+        return elementTop > windowViewTop && elementTop < windowViewBottom ||
+               elementBottom > windowViewTop && elementBottom < windowViewBottom;
+    }
+
     function getTopOffset() {
-        return 70 + parseInt($('section#about').css('marginTop'));
+        return navHeight + parseInt($('section#about').css('marginTop'));
     }
 });
 
@@ -161,31 +188,6 @@ function styleNavBar() {
 function addNavItemActiveClass(section) {
     $(`nav a[href="#${section}"]:not(.active)`).addClass('active');
     $(`nav a.active:not([href="#${section}"]`).removeClass('active');
-}
-
-function addLazyLoad(className) {
-    $(`.${className}:not(.loaded)`).each(function(index, element) {
-        if (isScrolledIntoView(element)) {
-
-            if ($(element).is('.skill__bar-fill')) {
-                $(element).css('width', `${$(element).data('value')}%`);
-            }
-
-            $(element).addClass('loaded');
-        }
-    });
-}
-
-function isScrolledIntoView(element) {
-    const windowViewTop = $document.scrollTop() + (isMobile() ? 0 : 70 /* Nav height */),
-          windowViewBottom = windowViewTop + $window.height(),
-          elementOffsetTop = $(element).offset().top,
-          yTranslate = $(element).is('.lazyload-text') ? 30 : 0,
-          elementTop = elementOffsetTop + parseInt($(element).css('paddingTop')) + yTranslate,
-          elementBottom = elementOffsetTop + $(element).height() + yTranslate;
-
-    return elementTop > windowViewTop && elementTop < windowViewBottom ||
-           elementBottom > windowViewTop && elementBottom < windowViewBottom;
 }
 
 function isMobile() {
