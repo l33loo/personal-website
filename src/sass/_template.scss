@@ -160,6 +160,7 @@ strong, .strong {
 i.fab {
   color: $nav-grey;
   margin-right: 10px;
+  font-size: 24px;
 }
 
 a {
@@ -173,21 +174,23 @@ a.icon {
     transition: all .3s ease-in-out;
   }
 
+  &:visited {
+    i.fab {
+      color: $orange;
+    }
+  }
+
   &:hover {
     i.fab {
       color: $charcoal;
+      text-shadow: $bright-green 2px 1px 1px;
     }
   }
 
-  &:hover {
+  &:active {
     i.fab {
-      text-shadow: $shadow-orange 1px 0 10px;
-    }
-  }
-
-  &:active, &:active {
-    i.fab {
-      color: $orange;
+      color: $bright-green;
+      text-shadow: $white 1px 0 10px;
     }
   }
 }

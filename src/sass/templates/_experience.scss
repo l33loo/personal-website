@@ -103,4 +103,29 @@
       }
     }
   }
+
+  a {
+    font-weight: 300;
+    color: $charcoal;
+    padding: 4px 1px 0;
+    background-image: linear-gradient( transparent 0%, transparent calc(50% - 9px), $light-green calc(50% - 9px), $light-green 100% );
+    transition: background-position .2s ease-in-out;
+    background-size: 100% 200%;
+    background-position: 0 0;
+    word-break: break-word;
+
+    &:visited {
+      color: lighten($charcoal, 15%);
+    }
+
+    &:hover {
+      background-position: 0 100%;
+      background-image: linear-gradient( transparent 0%, transparent calc(50% - 3px), $bright-green calc(50% - 3px), $bright-green 100% );
+    }
+
+    &:active {
+      background-image: linear-gradient( transparent 0%, transparent calc(50% - 9px), $white calc(50% - 9px), $white 100% );
+      text-shadow: $bright-green 1px 1px 1px;
+    }
+  }
 }

@@ -11,6 +11,10 @@ $g: rgba(255,255,255,0.7); /*a light grey*/
 $orange: #d48264;
 $shadow-orange: #ffa500;
 
+$bright-green: #07f53e;
+$light-green: lighten($bright-green, 40%);
+$purple: #9c08f3;
+
 $light-blue: #9fb2e3;
 $light-yellow: rgba(245, 236, 128, 0.8);
 $light-red: rgba(204, 106, 69, 0.8);

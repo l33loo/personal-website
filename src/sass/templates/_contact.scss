@@ -62,5 +62,13 @@
 
   &__text {
     padding: 45px;
+
+    a:not(.icon) {
+      color: $charcoal;
+
+      &:hover {
+        text-shadow: $bright-green 1px 1px 1px;
+      }
+    }
   }
 }
