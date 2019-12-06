@@ -47,6 +47,15 @@ ol[class] {
 
 ul:not([class]) {
   list-style-type: disc;
+  padding-inline-start: 20px;
+
+  @include media-breakpoint-up(sm) {
+    padding-inline-start: 30px;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-inline-start: 40px;
+  }
 }
 
 /* A elements that don't have a class get default styles */

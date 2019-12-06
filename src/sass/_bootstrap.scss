@@ -8,6 +8,16 @@
 @import "~bootstrap/scss/utilities";
 
 // Overrides
+.container {
+  @include media-breakpoint-up(md) {
+      max-width: 960px;
+  }
+
+  @include media-breakpoint-up(xl) {
+      max-width: 1140px;
+  }
+}
+
 .text-muted {
   color: $muted-grey !important;
 }
