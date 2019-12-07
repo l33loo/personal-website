@@ -15,6 +15,7 @@ $window.on('load', function() {
     $('#load').fadeOut();
 
     const $root = $('html, body'),
+          $main = $('#main'),
           $contact = $('#contact'),
           $about = $('#about'),
           $skills = $('#skills'),
@@ -94,10 +95,9 @@ $window.on('load', function() {
     });
 
     $header.on('click touchend', function() {
-        addNavItemActiveClass('about');
-        $root.animate({
-            scrollTop: $('#main').offset().top - navHeight
-        }, 1000);
+        $root.animate(
+            {scrollTop: $main.offset().top + parseInt($main.css('padding-top')) - navHeight},
+            1000);
     });
 
     $document.on('click touchstart', function(event) {
