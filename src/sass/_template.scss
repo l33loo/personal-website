@@ -18,6 +18,12 @@ body {
   }
 }
 
+body:not(.keyboard-user) {
+  *:focus {
+    outline: none;
+  }
+}
+
 .site-wrap {
   width: 100%;
   margin: 0 auto;

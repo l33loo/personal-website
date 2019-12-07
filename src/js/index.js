@@ -23,7 +23,8 @@ $window.on('load', function() {
           $nav = $('nav'),
           $navMenu = $('ol#nav-menu'),
           $navButton = $('#nav-button'),
-          navHeight = 70;
+          navHeight = 70,
+          keyboardUserCssClass = 'keyboard-user';
 
     addNavAriaAttr();
     styleNavBar();
@@ -106,6 +107,20 @@ $window.on('load', function() {
         }
     });
 
+    $document
+        .keydown(function(event) {
+            if (event.key === 'Tab') {
+                setIsKeyboardUser(true);
+            }
+        })
+        .click(function(event) {
+            // Pressing ENTER on buttons triggers a click event with coordinates at (0, 0)
+            setIsKeyboardUser(!event.screenX && !event.screenY);
+        })
+        .mousedown(function(event) {
+            setIsKeyboardUser(false);
+        });
+
     setInterval(function() {
         const $overlay = $('.site-wrap > .overlay-2');
         let overlayOpacity = $overlay.css('opacity');
@@ -173,6 +188,13 @@ $window.on('load', function() {
 
     function getTopOffset() {
         return navHeight + parseInt($('section#about').css('marginTop'));
+    }
+
+    function setIsKeyboardUser(isKeyboard) {
+        isKeyboard ?
+            $('body:not(.keyboard-user)').addClass('keyboard-user')
+        :
+            $('body.keyboard-user').removeClass('keyboard-user');
     }
 });
 

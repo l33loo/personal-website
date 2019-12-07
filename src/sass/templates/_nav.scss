@@ -33,7 +33,7 @@ nav {
     @include work-sans-500();
     font-size: 16px;
     color: $white;
-    transition: outline .4s ease;
+    transition: outline .4s ease, background-color 200ms ease-in-out;
 
     &:focus {
       outline-offset: -4px;
@@ -114,7 +114,6 @@ nav {
       a {
         width: 100%;
         position: relative;
-        transition: background-color 200ms ease-in-out;
 
         &:before {
           transition: height 200ms;
