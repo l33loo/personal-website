@@ -46,6 +46,8 @@ $window.on('load', function() {
         }, 100);
     });
 
+    $('img.parallax-slider').attr('role', 'presentation');
+
     $('nav a').click(function(event) {
         event.preventDefault();
 
