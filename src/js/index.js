@@ -42,6 +42,8 @@ $window.on('load', function() {
     $window.resize(function() {
         timeout = setTimeout(function() {
             addNavAriaAttr();
+            markActiveNavItem();
+            addLazyLoad('lazyload');
             clearTimeout(timeout);
         }, 100);
     });
