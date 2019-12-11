@@ -2,8 +2,15 @@
   const experience = [
     {
       'date': ['11.2018', '11.2019'],
-      'title': 'Junior front-end developer',
+      'title': 'Junior web developer',
       'location': 'VERB Interactive, Victoria BC',
+      'projects': [
+        ['Marine Atlantic Booking', 'https://book.marineatlantic.ca'],
+        ['Caesars Bluewaters Dubai', 'https://www.caesars.com/dubai'],
+        ['Cody Yellowstone', 'https://www.codyyellowstone.org'],
+        ['Isla Bella Beach Resort', 'https://www.islabellabeachresort.com'],
+        ['More launching soon...'],
+      ],
       'tasks': [
         'Worked on site builds and maintenance for the tourism industry.',
         'Debugging, web accessibility, translation, cross-browser compatibility.'
@@ -122,7 +129,11 @@
                 <ul>
                   <% e.projects.forEach(function(project) { %>
                     <li>
-                      <a class="project" href="<%= project[1] %>" target="_blank"><%= project[0] %></a>
+                      <% if (project[1]) { %>
+                        <a class="project" href="<%= project[1] %>" target="_blank"><%= project[0] %></a>
+                      <% } else {%>
+                        <%= project[0] %>
+                      <% } %>
                     </li>
                   <% }); %>
                 </ul>

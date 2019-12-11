@@ -27,7 +27,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Lila Karpowicz, junior front-end web developer',
+      title: 'Lila Karpowicz, web developer',
       template: '!!ejs-compiled-loader!src/index.template.ejs'
     })
   ],

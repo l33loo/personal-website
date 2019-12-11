@@ -48,6 +48,7 @@ ol[class] {
 ul:not([class]) {
   list-style-type: disc;
   padding-inline-start: 20px;
+  margin-bottom: 10px;
 
   @include media-breakpoint-up(sm) {
     padding-inline-start: 30px;
