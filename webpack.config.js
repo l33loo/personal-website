@@ -28,7 +28,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Lila Karpowicz, web developer',
-      template: '!!ejs-compiled-loader!src/index.template.ejs'
+      template: '!!ejs-compiled-loader-webpack4!src/index.template.ejs'
     })
   ],
   optimization: {
