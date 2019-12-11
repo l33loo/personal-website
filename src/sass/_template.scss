@@ -45,10 +45,10 @@ body:not(.keyboard-user) {
   }
 
   > .container > .row {
-    flex-direction: column-reverse;
+    flex-direction: column;
 
     @include media-breakpoint-up(md) {
-      flex-direction: row;
+      flex-direction: row-reverse;
     }
   }
 }
