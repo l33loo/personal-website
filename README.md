@@ -21,7 +21,8 @@ This is the code of my personal webpage (https://www.karpowicz.dev).
 
 ## Next Steps:
 
-* Add Babel and other tools to Webpack
+* Add webpack dev server
+* Add ejs lint?
 * Implement cache busting on images
 * Optimize images
 * Remove unused fonts and add font and icon files

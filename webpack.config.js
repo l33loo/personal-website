@@ -1,9 +1,6 @@
 /*
 TO DO:
-- Implement dev mode
-- Install Babel
 - Add img hashing and optimization, and implement src, href, data-src replacement
-- Install postcss-loader
 */
 
 const path = require('path');
@@ -12,6 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 // const WebpackProvideGlobalPlugin = require('webpack-provide-global-plugin');
 
 module.exports = {
@@ -29,7 +27,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Lila Karpowicz, web developer',
       template: '!!ejs-compiled-loader-webpack4!src/index.template.ejs'
-    })
+    }),
+    new StylelintPlugin({
+      context: path.resolve(__dirname, 'src/sass/'),
+    }),
   ],
   optimization: {
     minimizer: [new TerserJsPlugin({}), new OptimizeCssAssetsPlugin({})]
@@ -42,6 +43,19 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              syntax: 'postcss-scss',
+              plugins: [
+                require('postcss-import'),
+                require('stylelint'),
+                require('postcss-reporter'),
+                require('autoprefixer'),
+              ]
+            }
+          },
           'sass-loader',
         ]
       },
@@ -66,6 +80,19 @@ module.exports = {
             loader: 'expose-loader',
             options: '$'
           }
+        ]
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          },
+          'eslint-loader'
         ]
       }
       // {
