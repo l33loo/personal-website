@@ -131,7 +131,7 @@ $window.on('load', function() {
 	}, 3000);
 
 	/* Add the transition here instead of in the SCSS file to let the parallax
-  plugin do its magin first. Otherwise the image loads below the nav and
+  plugin do its magic first. Otherwise the image loads below the nav and
   the scrolling gets choppy. */
 	$header.css('transition', 'margin .5s');
 
