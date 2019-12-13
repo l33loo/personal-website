@@ -10,13 +10,16 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
+const distPath = path.resolve(__dirname, 'dist');
 // const WebpackProvideGlobalPlugin = require('webpack-provide-global-plugin');
 
 module.exports = {
-  mode: "production",
   entry: ["./src/js/index.js"],
+  devServer: {
+    contentBase: distPath
+  },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: distPath,
     filename: 'js/main.[contenthash].js'
   },
   plugins: [

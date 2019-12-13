@@ -21,7 +21,6 @@ This is the code of my personal webpage (https://www.karpowicz.dev).
 
 ## Next Steps:
 
-* Add webpack dev server
 * Add ejs lint?
 * Implement cache busting on images
 * Optimize images
