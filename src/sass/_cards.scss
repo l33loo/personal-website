@@ -1,12 +1,7 @@
 .card {
   width: 100%;
-  margin: $y-margin-xs 0;
   background-color: $white;
   border: 1px solid $border-grey;
-
-  @include media-breakpoint-up(md) {
-    margin: $y-margin-md 0;
-  }
 
   &__container {
     margin: 0 auto;

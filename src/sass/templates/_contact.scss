@@ -1,18 +1,26 @@
 .sidebar {
   &__content {
     margin-bottom: 0;
-    margin-top: $y-margin-xs;
 
     @include media-breakpoint-up(md) {
       position: sticky;
-      top: $y-margin-md + $nav-height-scroll;
-      margin-bottom: $y-margin-md;
-      margin-top: $y-margin-md;
+      top: $nav-height-scroll;
     }
 
     .card {
       margin: 0;
-      padding: 60px;
+
+      @include media-breakpoint-up(sm) {
+        padding: 30px;
+      }
+
+      @include media-breakpoint-up(dm) {
+        padding: 45px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding: 60px;
+      }
 
       &__container {
         font-weight: 300;
@@ -20,7 +28,6 @@
 
       @include media-breakpoint-between(md, lg) {
         &__container {
-
           font-size: 18px;
         }
 
