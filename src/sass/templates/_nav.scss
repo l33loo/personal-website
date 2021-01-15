@@ -11,7 +11,7 @@ nav {
   &.fixed {
     height: $nav-height-scroll;
     background: linear-gradient($nav-grey 0%, transparent 100%);
-    box-shadow: 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent;
     transition: height $nav-header-trans-time, background $nav-header-trans-time, box-shadow 0s linear 0s;
 
     @include media-breakpoint-up(sm) {
@@ -22,7 +22,7 @@ nav {
   &.scrolling {
     height: $nav-height-scroll;
     background: linear-gradient($nav-grey $nav-height-scroll, transparent 100%);
-    box-shadow: 0 0 5px $black;
+    box-shadow: 0 5px 5px -3px darken($nav-grey, 25%);
     transition: height $nav-header-trans-time, background $nav-header-trans-time, box-shadow .2s linear .4s;
   }
 
