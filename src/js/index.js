@@ -49,7 +49,8 @@ $window.on('load', function() {
 
 	$('img.parallax-slider').attr('role', 'presentation');
 
-	$('nav a').click(function(event) {
+	$('nav a').on('click touchstart', function(event) {
+		event.stopPropagation();
 		event.preventDefault();
 
 		if (isMobile()) {
@@ -63,7 +64,10 @@ $window.on('load', function() {
 		}, 500);
 	});
 
-	$navButton.on('click', function() {
+	$navButton.on('click touchstart', function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
 		if ($navMenu.is(':hidden')) {
 			$navMenu.slideDown();
 			$(this).attr('aria-expanded', 'true');
@@ -97,17 +101,13 @@ $window.on('load', function() {
 		}
 	});
 
-	$header.on('click touchend', function() {
+	$header.on('click touchend', function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
 		$root.animate(
 			{scrollTop: $main.offset().top + parseInt($main.css('padding-top')) - navHeight},
 			1000);
-	});
-
-	$document.on('click touchstart', function(event) {
-		if (isMobile() && !$(event.target).closest('nav').length) {
-			$navMenu.slideUp();
-			$navButton.attr('aria-expanded', 'false');
-		}
 	});
 
 	$document
@@ -116,7 +116,14 @@ $window.on('load', function() {
 			setIsKeyboardUser(true);
 		}
 	})
-	.click(function(event) {
+	.on('click touchstart', function(event) {
+		event.stopPropagation();
+
+		if (isMobile() && !$(event.target).closest('nav').length) {
+			$navMenu.slideUp();
+			$navButton.attr('aria-expanded', 'false');
+		}
+
 		// Pressing ENTER on buttons triggers a click event with coordinates at (0, 0)
 		setIsKeyboardUser(!event.screenX && !event.screenY);
 	})
