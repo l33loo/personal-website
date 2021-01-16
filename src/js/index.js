@@ -197,13 +197,15 @@ const addLazyLoad = (element) => {
 
 const lazyloadObserverOptions = {
 	rootMargin: `${navHeight}px 0px 0px 0px`,
-	threshold: 0.5,
+	threshold: 0.33,
 }
 
-const lazyloadObserver = new IntersectionObserver(function(entries) {
+const lazyloadObserver = new IntersectionObserver(function(entries, self) {
 	entries.forEach(entry => {
 		if (entry.isIntersecting) {
-			addLazyLoad($(entry.target))
+			addLazyLoad($(entry.target));
+
+			self.unobserve(entry.target);
 		}
 	})
 }, lazyloadObserverOptions)
