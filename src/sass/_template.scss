@@ -26,8 +26,13 @@ body:not(.keyboard-user) {
 
 .site-wrap {
   width: 100%;
-  max-width: 1680px;
+  max-width: $content-max-width;
   margin: 0 auto;
+  position: relative;
+}
+
+#main {
+  width: 100%;
   padding-bottom: $y-margin-xs;
   height: auto;
   position: relative;

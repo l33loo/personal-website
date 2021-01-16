@@ -32,7 +32,7 @@ $window.on('load', function() {
 
 	const lazyloads = document.querySelectorAll('.lazyload');
 	lazyloads.forEach(el => {
-		lazyloadObserver.observe(el)
+		lazyloadObserver.observe(el);
 	})
 
 	$window.on("scroll touchmove", function() {
@@ -147,11 +147,12 @@ $window.on('load', function() {
 	}
 
 	function markActiveNavItem() {
-		const documentTop = $document.scrollTop(),
-					contactTop = $contact.offset().top - navHeight,
-					aboutTop = $about.offset().top - navHeight,
-					skillsTop = $skills.offset().top - navHeight,
-					experienceTop = $experience.offset().top - navHeight,
+		const offset = navHeight + 5,
+					documentTop = $document.scrollTop(),
+					contactTop = $contact.offset().top - offset,
+					aboutTop = $about.offset().top - offset,
+					skillsTop = $skills.offset().top - offset,
+					experienceTop = $experience.offset().top - offset,
 					isMobileSize = isMobile();
 
 		if ((!isMobileSize && documentTop < aboutTop) || (isMobileSize && documentTop < contactTop)) {
