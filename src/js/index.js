@@ -187,7 +187,7 @@ function styleNavBar() {
 const addLazyLoad = (element) => {
 		if (!$(element).hasClass('loaded')) {
 			if ($(element).is('.skill__bar-fill')) {
-				$(element).css('width', `${$(element).data('value')}%`);
+				$(element).css('width', `${$(element).data('value')}`);
 			}
 
 			$(element).addClass('loaded');
