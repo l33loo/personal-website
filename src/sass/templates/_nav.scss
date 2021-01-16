@@ -118,7 +118,7 @@ nav {
         position: relative;
 
         &:before {
-          transition: height 200ms;
+          transition: height 200ms ease-out;
           position: absolute;
           bottom: 0;
           width: 100%;

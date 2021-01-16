@@ -133,11 +133,10 @@ $window.on('load', function() {
 		setIsKeyboardUser(false);
 	});
 
-	setInterval(function() {
-		const $overlay = $('.site-wrap > .overlay-2');
-		let overlayOpacity = $overlay.css('opacity');
-		$overlay.css('opacity', overlayOpacity === '1' ? '0' : '1');
-	}, 3000);
+	const imgs = document.querySelectorAll('[data-src]');
+	imgs.forEach(img => {
+		imgLazyObserver.observe(img);
+	});
 
 	function addNavAriaAttr() {
 		if (isMobile()) {
@@ -214,6 +213,20 @@ function addNavItemActiveClass(section) {
 	$(`nav a.active:not([href="#${section}"])`).removeClass('active');
 	$(`nav a[href="#${section}"]:not(.active)`).addClass('active');
 }
+
+const imgLazyObserverOptions = {
+  threshold: 0
+};
+
+const imgLazyObserver = new IntersectionObserver(function(entries, self) {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      const $target = $(entry.target);
+      $target.attr('src', $target.attr('data-src'));
+      self.unobserve(entry.target);
+    }
+  });
+}, imgLazyObserverOptions);
 
 function isMobile() {
 	return $window.width() < 768;

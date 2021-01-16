@@ -28,7 +28,7 @@ body:not(.keyboard-user) {
   width: 100%;
   max-width: 1680px;
   margin: 0 auto;
-  padding: 1px 0 $y-margin-xs;
+  padding-bottom: $y-margin-xs;
   height: auto;
   position: relative;
   /*$t is transparent, $g is light grey*/
@@ -42,7 +42,7 @@ body:not(.keyboard-user) {
 
   .overlay-1, .overlay-2 {
     position: absolute;
-    top: -1px;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -64,12 +64,17 @@ body:not(.keyboard-user) {
     linear-gradient(336deg, $light-red, $t 70.71%);
 }
 
+@keyframes overlay {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 .overlay-2 {
-  transition: opacity 3s;
-    background: linear-gradient(217deg, $light-yellow, $t 70.71%),
-      linear-gradient(127deg, $light-red, $t 70.71%),
-      linear-gradient(336deg, $light-blue, $t 70.71%);
-    opacity: 0;
+  background: linear-gradient(217deg, $light-yellow, $t 70.71%),
+    linear-gradient(127deg, $light-red, $t 70.71%),
+    linear-gradient(336deg, $light-blue, $t 70.71%);
+  animation: overlay 8s infinite;
 }
 
 section {
