@@ -9,7 +9,8 @@ import '../img/hero.jpg';
 import '../img/profile.jpg';
 
 const $document = $(document),
-			$window = $(window);
+			$window = $(window),
+			navHeight = 70;
 
 $window.on('load', function() {
 	$('#load').fadeOut();
@@ -23,18 +24,20 @@ $window.on('load', function() {
 				$header = $('header'),
 				$navMenu = $('ol#nav-menu'),
 				$navButton = $('#nav-button'),
-				navHeight = 70,
 				keyboardUserCssClass = 'keyboard-user';
 
 	addNavAriaAttr();
 	styleNavBar();
 	markActiveNavItem();
-	addLazyLoad('lazyload');
+
+	const lazyloads = document.querySelectorAll('.lazyload');
+	lazyloads.forEach(el => {
+		lazyloadObserver.observe(el);
+	})
 
 	$window.on("scroll touchmove", function() {
 		styleNavBar();
 		markActiveNavItem();
-		addLazyLoad('lazyload');
 	});
 
 	let timeout;
@@ -42,14 +45,14 @@ $window.on('load', function() {
 		timeout = setTimeout(function() {
 			addNavAriaAttr();
 			markActiveNavItem();
-			addLazyLoad('lazyload');
 			clearTimeout(timeout);
 		}, 100);
 	});
 
 	$('img.parallax-slider').attr('role', 'presentation');
 
-	$('nav a').click(function(event) {
+	$('nav a').on('click touchstart', function(event) {
+		event.stopPropagation();
 		event.preventDefault();
 
 		if (isMobile()) {
@@ -59,11 +62,14 @@ $window.on('load', function() {
 
 		const href = $(this).attr('href');
 		$root.animate({
-			scrollTop: $(href).offset().top - getTopOffset()
+			scrollTop: $(href).offset().top - navHeight
 		}, 500);
 	});
 
-	$navButton.on('click', function() {
+	$navButton.on('click touchstart', function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
 		if ($navMenu.is(':hidden')) {
 			$navMenu.slideDown();
 			$(this).attr('aria-expanded', 'true');
@@ -97,17 +103,13 @@ $window.on('load', function() {
 		}
 	});
 
-	$header.on('click touchend', function() {
+	$header.on('click touchend', function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+
 		$root.animate(
 			{scrollTop: $main.offset().top + parseInt($main.css('padding-top')) - navHeight},
 			1000);
-	});
-
-	$document.on('click touchstart', function(event) {
-		if (isMobile() && !$(event.target).closest('nav').length) {
-			$navMenu.slideUp();
-			$navButton.attr('aria-expanded', 'false');
-		}
 	});
 
 	$document
@@ -116,7 +118,14 @@ $window.on('load', function() {
 			setIsKeyboardUser(true);
 		}
 	})
-	.click(function(event) {
+	.on('click touchstart', function(event) {
+		event.stopPropagation();
+
+		if (isMobile() && !$(event.target).closest('nav').length) {
+			$navMenu.slideUp();
+			$navButton.attr('aria-expanded', 'false');
+		}
+
 		// Pressing ENTER on buttons triggers a click event with coordinates at (0, 0)
 		setIsKeyboardUser(!event.screenX && !event.screenY);
 	})
@@ -124,16 +133,10 @@ $window.on('load', function() {
 		setIsKeyboardUser(false);
 	});
 
-	setInterval(function() {
-		const $overlay = $('.site-wrap > .overlay-2');
-		let overlayOpacity = $overlay.css('opacity');
-		$overlay.css('opacity', overlayOpacity === '1' ? '0' : '1');
-	}, 3000);
-
-	/* Add the transition here instead of in the SCSS file to let the parallax
-  plugin do its magic first. Otherwise the image loads below the nav and
-  the scrolling gets choppy. */
-	$header.css('transition', 'margin .5s');
+	const imgs = document.querySelectorAll('[data-src]');
+	imgs.forEach(img => {
+		imgLazyObserver.observe(img);
+	});
 
 	function addNavAriaAttr() {
 		if (isMobile()) {
@@ -144,16 +147,17 @@ $window.on('load', function() {
 	}
 
 	function markActiveNavItem() {
-		const topOffset = getTopOffset(),
+		const offset = navHeight + 5,
 					documentTop = $document.scrollTop(),
-					contactTop = Math.floor($contact.offset().top - topOffset),
-					aboutTop = Math.floor($about.offset().top - topOffset),
-					skillsTop = Math.floor($skills.offset().top - topOffset),
-					experienceTop = Math.floor($experience.offset().top - topOffset);
+					contactTop = $contact.offset().top - offset,
+					aboutTop = $about.offset().top - offset,
+					skillsTop = $skills.offset().top - offset,
+					experienceTop = $experience.offset().top - offset,
+					isMobileSize = isMobile();
 
-		if ((!isMobile() && documentTop < aboutTop) || (isMobile() && documentTop < contactTop)) {
+		if ((!isMobileSize && documentTop < aboutTop) || (isMobileSize && documentTop < contactTop)) {
 			addNavItemActiveClass('home');
-		} else if (isMobile() && documentTop < aboutTop) {
+		} else if (isMobileSize && documentTop < aboutTop) {
 			addNavItemActiveClass('contact');
 		} else if (documentTop < skillsTop) {
 			addNavItemActiveClass('about');
@@ -162,35 +166,6 @@ $window.on('load', function() {
 		} else {
 			addNavItemActiveClass('experience');
 		}
-	}
-
-	function addLazyLoad(className) {
-		$(`.${className}:not(.loaded)`).each(function(index, element) {
-			if (isScrolledIntoView(element)) {
-
-				if ($(element).is('.skill__bar-fill')) {
-					$(element).css('width', `${$(element).data('value')}%`);
-				}
-
-				$(element).addClass('loaded');
-			}
-		});
-	}
-
-	function isScrolledIntoView(element) {
-		const windowViewTop = $document.scrollTop() + (isMobile() ? 0 : navHeight),
-					windowViewBottom = windowViewTop + $window.height(),
-					elementOffsetTop = $(element).offset().top,
-					yTranslate = $(element).is('.lazyload-text') ? 30 : 0,
-					elementTop = elementOffsetTop + parseInt($(element).css('paddingTop')) + yTranslate,
-					elementBottom = elementOffsetTop + $(element).height() + yTranslate;
-
-		return elementTop > windowViewTop && elementTop < windowViewBottom ||
-					elementBottom > windowViewTop && elementBottom < windowViewBottom;
-	}
-
-	function getTopOffset() {
-		return navHeight + parseInt($('section#about').css('marginTop'));
 	}
 
 	function setIsKeyboardUser(isKeyboard) {
@@ -210,10 +185,49 @@ function styleNavBar() {
 	}
 }
 
-function addNavItemActiveClass(section) {
-	$(`nav a[href="#${section}"]:not(.active)`).addClass('active');
-	$(`nav a.active:not([href="#${section}"])`).removeClass('active');
+const addLazyLoad = (element) => {
+		if (!$(element).hasClass('loaded')) {
+			if ($(element).is('.skill__bar-fill')) {
+				$(element).css('width', `${$(element).data('value')}`);
+			}
+
+			$(element).addClass('loaded');
+		}
+	}
+
+const lazyloadObserverOptions = {
+	rootMargin: `${navHeight}px 0px 0px 0px`,
+	threshold: 0.33,
 }
+
+const lazyloadObserver = new IntersectionObserver(function(entries, self) {
+	entries.forEach(entry => {
+		if (entry.isIntersecting) {
+			addLazyLoad($(entry.target));
+
+			self.unobserve(entry.target);
+		}
+	})
+}, lazyloadObserverOptions)
+
+function addNavItemActiveClass(section) {
+	$(`nav a.active:not([href="#${section}"])`).removeClass('active');
+	$(`nav a[href="#${section}"]:not(.active)`).addClass('active');
+}
+
+const imgLazyObserverOptions = {
+  threshold: 0
+};
+
+const imgLazyObserver = new IntersectionObserver(function(entries, self) {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      const $target = $(entry.target);
+      $target.attr('src', $target.attr('data-src'));
+      self.unobserve(entry.target);
+    }
+  });
+}, imgLazyObserverOptions);
 
 function isMobile() {
 	return $window.width() < 768;

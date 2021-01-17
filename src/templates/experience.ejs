@@ -1,15 +1,36 @@
 <%
   const experience = [
+  {
+      'date': ['02.2020', 'present'],
+      'title': 'Junior software developer',
+      'location': 'Dyspatch, Victoria BC',
+      'projects': [
+        ['Dyspatch', 'https://app.dyspatch.io'],
+      ],
+      'tasks': [
+        'Implementing features and fixing bugs',
+      ],
+      'stack': {
+        'languages': [
+          'Typescript',
+          'Go',
+          'CSS',
+          'SQL',
+        ],
+        'tools': [
+          'git',
+          'React',
+        ]
+      }
+    },
     {
       'date': ['11.2018', '11.2019'],
       'title': 'Junior web developer',
       'location': 'VERB Interactive, Victoria BC',
       'projects': [
         ['Marine Atlantic Booking', 'https://book.marineatlantic.ca'],
+        ['Westcoast Connection', 'https://www.westcoastconnection.com'],
         ['Caesars Bluewaters Dubai', 'https://www.caesars.com/dubai'],
-        ['Cody Yellowstone', 'https://www.codyyellowstone.org'],
-        ['Isla Bella Beach Resort', 'https://www.islabellabeachresort.com'],
-        ['More launching soon...'],
       ],
       'tasks': [
         'Worked on site builds and maintenance for the tourism industry.',
@@ -26,7 +47,6 @@
           'git',
           'jQuery',
           'React',
-          'Symfony',
           'Wordpress',
           'Bootstrap'
         ]
@@ -88,60 +108,62 @@
   ];
 %>
 
-<section id="experience" class="card">
-  <div class="card__container">
-    <h2 class="h1">Experience & Education</h2>
-    <ol class="experiences">
+<section id="experience">
+  <div class="card">
+    <div class="card__container">
+      <h2 class="h1">Experience & Education</h2>
+      <ol class="experiences">
 
-      <% experience.forEach(function(e) { %>
-        <li class="experience lazyload d-flex">
-          <div class="h3 experience__date text-right">
-            <%= e.date[0] %>
-            <% if (e.date[1]) { %>
-              &ndash; <%= e.date[1] %>
-            <% } %>
-          </div>
-          <div class="experience__details">
-            <h3><%= e.title %></h3>
-            <div class="experience__location text-muted"><%= e.location %></div>
-            <ul class="experience__stack row">
-
-              <% e.stack.languages.forEach(function(lang) { %>
-                <li class="language button button__small"><%= lang %></li>
-              <% }); %>
-
-              <% e.stack.tools.forEach(function(tool) { %>
-                <li class="tool button button__small"><%= tool %></li>
-              <% }); %>
-
-            </ul>
-
-              <% if (e.tasks && e.tasks.length) { %>
-                <ul>
-                  <% e.tasks.forEach(function(task) { %>
-                    <li><%= task %></li>
-                  <% }); %>
-                </ul>
+        <% experience.forEach(function(e) { %>
+          <li class="experience lazyload d-flex">
+            <div class="h3 experience__date text-right">
+              <%= e.date[0] %>
+              <% if (e.date[1]) { %>
+                &ndash; <%= e.date[1] %>
               <% } %>
+            </div>
+            <div class="experience__details">
+              <h3><%= e.title %></h3>
+              <div class="experience__location text-muted"><%= e.location %></div>
+              <ul class="experience__stack row">
 
-              <%if (e.projects && e.projects.length) { %>
-                <h4>Projects:</h4>
-                <ul>
-                  <% e.projects.forEach(function(project) { %>
-                    <li>
-                      <% if (project[1]) { %>
-                        <a class="project" href="<%= project[1] %>" target="_blank"><%= project[0] %></a>
-                      <% } else {%>
-                        <%= project[0] %>
-                      <% } %>
-                    </li>
-                  <% }); %>
-                </ul>
-              <% } %>
-          </div>
-        </li>
-      <% }); %>
+                <% e.stack.languages.forEach(function(lang) { %>
+                  <li class="language button button__small"><%= lang %></li>
+                <% }); %>
 
-    </ol>
+                <% e.stack.tools.forEach(function(tool) { %>
+                  <li class="tool button button__small"><%= tool %></li>
+                <% }); %>
+
+              </ul>
+
+                <% if (e.tasks && e.tasks.length) { %>
+                  <ul>
+                    <% e.tasks.forEach(function(task) { %>
+                      <li><%= task %></li>
+                    <% }); %>
+                  </ul>
+                <% } %>
+
+                <%if (e.projects && e.projects.length) { %>
+                  <h4>Projects:</h4>
+                  <ul>
+                    <% e.projects.forEach(function(project) { %>
+                      <li>
+                        <% if (project[1]) { %>
+                          <a class="project" href="<%= project[1] %>" target="_blank"><%= project[0] %></a>
+                        <% } else {%>
+                          <%= project[0] %>
+                        <% } %>
+                      </li>
+                    <% }); %>
+                  </ul>
+                <% } %>
+            </div>
+          </li>
+        <% }); %>
+
+      </ol>
+    </div>
   </div>
 </section>

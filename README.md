@@ -24,7 +24,7 @@ This is the code of my personal webpage (https://www.karpowicz.dev).
 * Add ejs lint?
 * Implement cache busting on images
 * Optimize images
-* Remove unused fonts and add font and icon files
+* Add font and icon files
 * Clean up code
 * Implement deployment pipeline
 
